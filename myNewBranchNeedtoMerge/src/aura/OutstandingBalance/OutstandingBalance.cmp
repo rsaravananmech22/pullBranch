@@ -1,0 +1,54 @@
+<aura:component implements="force:hasRecordId,flexipage:availableForAllPageTypes" controller="OutstandingBalanceService">
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+	<aura:attribute name="recordId" type="Id" />
+	<aura:attribute name="balances" type="Outstanding_Balance__x[]"/>
+
+	<div class="container slds-card_boundary slds-card">
+		<div class="slds-card__header slds-grid">
+			<lightning:icon class="slds-media__figure" iconName="custom:custom41" size="small"/>
+			<h2 class="slds-text-heading--small outstanding_balance__bold">{!$Label.c.LBL_OutstandingBalance}</h2>
+		</div>
+		<div class="slds-card__body">
+			<aura:if isTrue="{!v.balances.length > 0}">
+				<table class="slds-table slds-table_bordered slds-table_cell-buffer">
+					<thead>
+					    <tr class="slds-text-title_caps">
+					    	<th scope="col">
+					        	<div class="slds-truncate">{!$Label.c.LBL_OutstandingBalance_Currency}</div>				        	
+					      	</th>
+						    <th scope="col">
+					        	<div class="slds-truncate">{!$Label.c.LBL_OutstandingBalance_Total}</div>				        	
+					      	</th>
+					      	<th scope="col">
+					      		<div class="slds-truncate">{!$Label.c.LBL_OutstandingBalance_0Days}</div>				        	
+					      	</th>
+					      	<th scope="col">
+					      		<div class="slds-truncate">{!$Label.c.LBL_OutstandingBalance_30Days}</div>				        	
+					      	</th>
+					      	<th scope="col">
+					      		<div class="slds-truncate">{!$Label.c.LBL_OutstandingBalance_60Days}</div>
+					      	</th>
+					      	<th scope="col">
+					      		<div class="slds-truncate">{!$Label.c.LBL_OutstandingBalance_90Days}</div>
+					      	</th>
+					    </tr>
+				  	</thead>
+					<tbody>
+						<aura:iteration var="outstandingBalance" items="{!v.balances}">
+						    <tr>
+						    	<td>{!outstandingBalance.CurrencyIsoCode}</td>
+						    	<td><lightning:formattedNumber minimumFractionDigits="2" value="{!outstandingBalance.Total_Remaining_Amount__c}"/></td>
+						    	<td><lightning:formattedNumber minimumFractionDigits="2" value="{!outstandingBalance.X0_30_Days__c}"/></td>
+						    	<td><lightning:formattedNumber minimumFractionDigits="2" value="{!outstandingBalance.X30_60_Days__c}"/></td>
+						    	<td><lightning:formattedNumber minimumFractionDigits="2" value="{!outstandingBalance.X60_90_Days__c}"/></td>
+						    	<td><lightning:formattedNumber minimumFractionDigits="2" value="{!outstandingBalance.Greater_than_90_Days__c}"/></td>
+						    </tr>
+						</aura:iteration>
+					</tbody>
+				</table>
+			</aura:if>
+		</div>
+	</div>
+</aura:component>
