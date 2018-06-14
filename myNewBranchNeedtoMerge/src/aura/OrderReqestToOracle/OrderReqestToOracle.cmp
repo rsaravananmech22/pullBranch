@@ -1,0 +1,12 @@
+<aura:component implements="force:lightningQuickAction,force:hasRecordId" controller="MAS_CreatePlatformEventAuraController">
+	 <ltng:require styles="{!$Resource.SLDSSP17 + '/assets/styles/lightning-design-system-ltng.css'}"/>
+
+     <aura:attribute name="recordId" type="Id" /> 
+     <aura:attribute name="myText" type="string"/>
+     <aura:attribute name="meessage" type="string"/>
+     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+     <div class="{!'slds-box slds-theme--' + v.myText}">
+      <p>{!v.meessage}.</p>
+    </div>
+</aura:component>
