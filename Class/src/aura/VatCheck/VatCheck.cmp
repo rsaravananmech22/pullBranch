@@ -1,0 +1,15 @@
+<aura:component implements="force:lightningQuickAction,force:hasRecordId" controller="MAS_VatCheckAuraController">
+	<ltng:require styles="{!$Resource.SLDSSP17 + '/assets/styles/lightning-design-system-ltng.css'}"/>
+    <!-- Id of the Account the page hosting this component is showing -->
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="myText" type="string"/>
+    <aura:attribute name="meessage" type="string"/>
+	<!--<lightning:notificationsLibrary aura:id="notifLib"/> -->
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <!--<ui:outputText value="{!v.myText}"/>-->
+
+    <div class="{!'slds-box slds-theme--' + v.myText}">
+      <p>{!v.meessage}.</p>
+    </div>
+</aura:component>

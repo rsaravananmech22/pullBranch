@@ -1,0 +1,25 @@
+<aura:component implements="force:lightningQuickAction,force:hasRecordId,flexipage:availableForAllPageTypes" controller="TransactionSummaryService">
+	
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+	<aura:attribute name="recordId" type="Id" />
+	<aura:attribute name="title" type="String" default="loading"/>
+	<aura:attribute name="message" type="String" default="Processing your request. Please wait"/>
+
+	<div class="slds-align_absolute-center slds-page-header h1">
+		<aura:if isTrue="{!v.title == 'loading'}">
+			{!v.message}
+		</aura:if>
+
+		<aura:if isTrue="{!v.title == 'SUCCESS!!'}">
+			<lightning:icon iconName="action:approval" size="small" alternativeText="Indicates success"/>
+	      	&nbsp;{!v.title}&nbsp;{!v.message}
+		</aura:if>
+
+	    <aura:if isTrue="{!v.title == 'ERROR!!'}">
+			<lightning:icon iconName="action:close" size="small" alternativeText="Indicates failure"/>
+	      	&nbsp;{!v.title}&nbsp;{!v.message}
+	    </aura:if>
+    </div>
+
+</aura:component>

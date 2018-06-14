@@ -1,0 +1,19 @@
+<apex:page standardController="Order"  sidebar="false" showChat="false" showHeader="false">
+     <apex:slds />
+     <apex:includeLightning />
+     <div id="lightning"/>
+     <script>
+         const params = new URL(location.href).searchParams;
+         const orderId = params.get('oid'); 
+         $Lightning.use("c:New_OrderApp", function() {
+             $Lightning.createComponent("c:New_Order",
+             { 
+                 OrderIdVar : orderId 
+             },
+             "lightning",
+             function(cmp) {
+             console.log('Component created, do something cool here');
+             });
+         });
+ </script>
+</apex:page>

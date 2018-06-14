@@ -1,0 +1,52 @@
+<aura:component implements="force:lightningQuickAction,force:hasRecordId" controller="MAS_OrderActivateAuraController" >
+    <ltng:require styles="{!$Resource.SLDSSP17 + '/assets/styles/lightning-design-system-ltng.css'}"/>
+    
+    <aura:attribute name="recordId" type="Id" />    
+    <aura:attribute name="order" type="Order" />
+    <aura:attribute name="errortype" type="string"/>
+    <aura:attribute name="message" type="string"/>
+    <aura:attribute name="approvespinner" type="Boolean" default="false"/>
+    <aura:attribute name="emailTemplate" type="EmailTemplate" />
+    <aura:attribute name="emailBody" type="string"/>
+    <aura:attribute name="sendEmail" type="Boolean" default="false"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <style>
+        .slds-modal__container{max-width: 70rem !important;width:70% !important;}
+    </style>
+    
+    <aura:unescapedhtml value="{!v.emailBody}"/>
+    <br/>
+    
+    <aura:if isTrue="{!v.approvespinner}">
+        <div data-reactroot="" class="demo-only" style="height: 6rem;">
+            <div role="status" class="slds-spinner slds-spinner_medium" style="position: relative;">
+                <span class="slds-assistive-text">Loading</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    
+    <aura:If isTrue="{! v.message.length > 0 }">
+        <div class="{!'slds-box slds-theme--' + v.errortype}">
+        <p>{!v.message}.</p>
+        </div>
+    </aura:If>
+    <br/>
+    
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+            <tr>
+                <td>&nbsp;</td>
+                <td style="text-align: right;">
+                    <lightning:button label="{!$Label.c.LBL_BTN_Approve}" onclick="{!c.approve}"></lightning:button>
+                    <lightning:button label="{!$Label.c.LBL_BTN_ApproveWithoutEmail}" onclick="{!c.approveWithoutEmail}"></lightning:button>
+                    <lightning:button label="{!$Label.c.LBL_BTN_Reject}" onclick="{!c.reject}"></lightning:button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+</aura:component>
